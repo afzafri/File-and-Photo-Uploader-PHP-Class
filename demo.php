@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form action="up.php" method="post" enctype="multipart/form-data">
+<form action="demo.php" method="post" enctype="multipart/form-data">
 Upload: <input type="file" name="fileupload"><br>
 <input type="submit" name="submit">
 </form>
