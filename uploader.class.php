@@ -8,6 +8,7 @@ class Uploader
 	public $nameid;
 	public $size;
 	public $upimg;
+	public $exists;
 	
 	public function upload()
 	{
