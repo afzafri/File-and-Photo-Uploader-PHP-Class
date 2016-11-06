@@ -29,6 +29,7 @@ if(isset($_POST['submit']))
 	$obj->nameid = "reaperz"; //image/file name or id
 	$obj->size = 100000; //set file/image size limit. note: 100000 is 100KB
 	$obj->upimg = true; //if you want to upload image, set true, else set false.
+	$obj->exists = true; //set true if you want to check if the file already exist, if exist, file will not upload
 
 	//upload
 	$stat = $obj->upload();
