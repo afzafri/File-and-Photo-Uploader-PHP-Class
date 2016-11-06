@@ -18,14 +18,16 @@ class Uploader
 		$nameid = $this->nameid;
 		$size = $this->size;
 		$upimg = $this->upimg;
+		$exists = $this->exists;
 
 		$uploadOk = 1;
-		$err1 = $err2 = $err3 = $err4 = "";
+		$err1 = $err2 = $err3 = $err4 = $err5 = "";
 
 		//upload image
 		$target_dir = $dir;
 		$target_file = $target_dir . basename($files["name"]);
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+		$newfilename = $target_dir . $nameid . "." . $imageFileType;
 		
 		if($upimg)
 		{
@@ -40,14 +42,23 @@ class Uploader
 			}
 		}
 
+		if($exists)
+		{
+			// Check if file already exists
+			if (file_exists($newfilename)) {
+				$err3 = "<br>Sorry, file already exists.";
+			    $uploadOk = 0;
+			}
+		}
+
 		// Check file size
 		if ($files["size"] > $size) {
-			$err3 = "<br>Sorry, your file is too large.";
+			$err4 = "<br>Sorry, your file is too large.";
 			$uploadOk = 0;
 		}
 		// Allow certain file formats
 		if(!in_array($imageFileType, $filetype)) {
-			$err4 = "<br>Sorry, only ".implode(',', $filetype)." files are allowed.";
+			$err5 = "<br>Sorry, only ".implode(',', $filetype)." files are allowed.";
 			$uploadOk = 0;
 		}
 		
@@ -55,13 +66,13 @@ class Uploader
 		
 		// Check if $uploadOk is set to 0 by an error
 		if ($uploadOk == 0) {
-			$imgstat = "<br>File not uploaded.".$err1.$err2.$err3.$err4;
+			$imgstat = "<br>File not uploaded.".$err1.$err2.$err3.$err4.$err5;
 		// if everything is ok, try to upload file
 		} else {
-			if (move_uploaded_file($files["tmp_name"], $target_dir . $nameid . "." . $imageFileType)) {
+			if (move_uploaded_file($files["tmp_name"], $newfilename)) {
 				$imgstat = "The file has been uploaded.";
 			} else {
-				$imgstat = "Sorry, there was an error uploading your file.".$err1.$err2.$err3.$err4;
+				$imgstat = "Sorry, there was an error uploading your file.".$err1.$err2.$err3.$err4.$err5;
 			}
 		}
 
