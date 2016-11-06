@@ -18,8 +18,8 @@ class Uploader
 		$filetype = $this->filetype;
 		$nameid = $this->nameid;
 		$size = $this->size;
-		$upimg = $this->upimg;
-		$exists = $this->exists;
+		$upimg = ($this->upimg != "") ? $this->upimg : false;
+		$exists = ($this->exists != "") ? $this->exists : false;
 
 		$uploadOk = 1;
 		$err1 = $err2 = $err3 = $err4 = $err5 = "";
