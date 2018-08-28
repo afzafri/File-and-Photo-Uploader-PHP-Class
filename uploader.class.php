@@ -27,8 +27,8 @@ class Uploader
 
 		//upload image
 		$target_dir = $dir;
-		$orifilename = basename($files["name"]);
-		$target_file = $target_dir . $orifilename;
+		$filename = basename($files["name"]);
+		$target_file = $target_dir . $filename;
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 		// check if file name not specified, then use the orignal file name
@@ -38,7 +38,8 @@ class Uploader
 		}
 		else
 		{
-			$newfilename = $target_dir . $nameid . "." . $imageFileType;
+			$filename = $nameid . "." . $imageFileType;
+			$newfilename = $target_dir . $filename;
 		}
 
 		if($upimg)
@@ -95,7 +96,7 @@ class Uploader
 				$imgStatus = "The file has been uploaded.";
 
 				$response['success']['status'] = $imgStatus;
-				$response['success']['path'] = $newfilename;
+				$response['success']['filename'] = $filename;
 			} else {
 				$imgStatus = "Sorry, there was an error uploading your file.";
 
