@@ -16,20 +16,30 @@ class Uploader
 		$dir = $this->dir;
 		$files = $this->files;
 		$filetype = $this->filetype;
-		$nameid = $this->nameid;
+		$nameid = ($this->nameid != "") ? $this->nameid : "";
 		$size = $this->size;
 		$upimg = ($this->upimg != "") ? $this->upimg : false;
 		$exists = ($this->exists != "") ? $this->exists : false;
 
 		$uploadOk = 1;
-		$typeErr = $existErr = $sizeErr = $formatErr = $imgStatus = "";
+		$newfilename = $typeErr = $existErr = $sizeErr = $formatErr = $imgStatus = "";
 		$response = [];
 
 		//upload image
 		$target_dir = $dir;
-		$target_file = $target_dir . basename($files["name"]);
+		$orifilename = basename($files["name"]);
+		$target_file = $target_dir . $orifilename;
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-		$newfilename = $target_dir . $nameid . "." . $imageFileType;
+
+		// check if file name not specified, then use the orignal file name
+		if($nameid == "")
+		{
+			$newfilename = $target_file;
+		}
+		else
+		{
+			$newfilename = $target_dir . $nameid . "." . $imageFileType;
+		}
 
 		if($upimg)
 		{

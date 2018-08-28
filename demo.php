@@ -26,7 +26,7 @@ if(isset($_POST['submit']))
 	$obj->dir = "./images/"; //directory to store the image/file
 	$obj->files = $_FILES["fileupload"]; //receive from form
 	$obj->filetype = array('png','gif'); //set the allowed image/file extensions
-	$obj->nameid = "reaperz"; //image/file name or id
+	$obj->nameid = "reaperz"; //image/file name or id. Do not set or leave it null if want the original file name.
 	$obj->size = 100000; //set file/image size limit. note: 100000 is 100KB
 	//below is optional. If don't want to use it, remove from code. default for both is false.
 	$obj->upimg = true; //set true if want to upload image.
