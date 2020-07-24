@@ -27,6 +27,11 @@ class Uploader
 
 		//upload image
 		$target_dir = $dir;
+		//Check if the directory already exists.
+		if(!is_dir($target_dir)){
+			//Directory does not exist, so lets create it.
+			mkdir($target_dir, 0755);
+		}
 		$filename = basename($files["name"]);
 		$target_file = $target_dir . $filename;
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
